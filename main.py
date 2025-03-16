@@ -206,8 +206,6 @@ def common_main():
     playback_speed = 3600 * 24 * 3
     dt = playback_speed/fps
 
-    global animation
-
     projectile = Projectile(ax, dt, speed_bounds, fps)
 
     def reset_projectile(speed = config.initial_speed):
@@ -223,6 +221,7 @@ def common_main():
 
     button.on_clicked(playback_toggle_handler)
     speed_slider.on_changed(speed_change_handler)
+    global animation
     animation = FuncAnimation(fig, projectile.draw_frame, interval=1000/fps, cache_frame_data=False, blit=False)
 
     reset_projectile()
