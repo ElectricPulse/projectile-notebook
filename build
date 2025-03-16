@@ -1,0 +1,30 @@
+#!/bin/bash
+
+function main() {
+	local session=matplotlib
+	local escape_key=`echo -ne '\015'`
+	local cmd='python -i server.py'
+	local log='out/run.log'
+
+	if ! screen -list | grep -q "$session"; then
+		screen -dmS "$session" bash -c "${cmd}"
+	fi
+
+	if [ -p "$log" ]; then
+		rm "$log"
+	fi
+
+	screen -S "$session" -X stuff "reload('$log')$escape_key"
+
+	while true; do
+		if [ -p "$log" ]; then
+			break
+		fi
+
+		sleep 0.1
+	done
+
+	cat "$log"
+}
+
+main
