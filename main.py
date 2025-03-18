@@ -201,9 +201,9 @@ def common_main():
     # Projectile #
     ##############
 
-    fps = 15
+    fps = 6
     # Playback speed amount of seconds in simulation is one second during playback
-    playback_speed = 3600 * 24 * 2
+    playback_speed = 3600 * 24 * 5
     dt = playback_speed/fps
 
     projectile = Projectile(ax, dt, speed_bounds, fps)
